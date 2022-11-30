@@ -1,6 +1,6 @@
-package boggle;
-import boggle.BoggleModel;
+package views;
 
+import boggle.BoggleModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;

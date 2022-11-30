@@ -1,5 +1,10 @@
 package boggle;
 
+import boggle.BoggleGame;
+import boggle.BoggleGrid;
+import boggle.BoggleStats;
+import boggle.Dictionary;
+
 import java.io.*;
 import java.util.*;
 

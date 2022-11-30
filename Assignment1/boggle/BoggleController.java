@@ -1,8 +1,7 @@
 package boggle;
 
 
-import boggle.BoggleModel;
-import boggle.BoggleView;
+import views.BoggleView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
