@@ -1,5 +1,4 @@
 package boggle;
-package boggle;
 
 import java.io.*;
 import java.util.*;
