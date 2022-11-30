@@ -12,6 +12,7 @@ public class Main {
         BoggleGame b = new BoggleGame();
         b.giveInstructions();
         b.playGame();
+
     }
 
 }
