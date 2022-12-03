@@ -38,10 +38,11 @@ public class BoggleMultiplayer {
     public BoggleMultiplayer() {
         this.scanner = new Scanner(System.in);
         this.gameStats = new BoggleStats();
+        this.gameStats.setGameMultiplayer();
     }
 
     /*
-     * Provide instructions to the user, so they know how to play the game.
+     * Provide instructions to the players, so they know how to play the game.
      */
     public void giveInstructions()
     {
@@ -59,8 +60,8 @@ public class BoggleMultiplayer {
 
 
     /*
-     * Gets information from the user to initialize a new Boggle game.
-     * It will loop until the user indicates they are done playing.
+     * Gets information from the player to initialize a new Boggle multiplayer game.
+     * It will loop until the players indicates they are done playing.
      */
     public void playGame(){
         int boardSize;
@@ -138,14 +139,14 @@ public class BoggleMultiplayer {
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        Dictionary boggleDict = new Dictionary("wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        Dictionary boggleDict = new Dictionary("C:\\Users\\moeez\\MMFA22\\Assignment1\\wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
         Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
         findAllWords(allWords, boggleDict, grid);
-        //step 4. allow the user to try to find some words on the grid
-        humanMove(grid, allWords);
-        //step 5. allow the computer to identify remaining words
-        computerMove(allWords);
+        //step 4. allow the players to try to find some words on the grid
+        humanMove(grid, allWords, "Player1");
+        humanMove(grid, allWords, "Player2");
+        wordsNotFound(allWords);
     }
 
     /*
@@ -278,8 +279,8 @@ public class BoggleMultiplayer {
      * @param board The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
-    private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords){
-        System.out.println("It's your turn to find some words!");
+    private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords, String playerID){
+        System.out.println("It's " + playerID + "'s turn to find some words!");
         while(true) {
             //You write code here!
             //step 1. Print the board for the user, so they can scan it for words
@@ -294,28 +295,30 @@ public class BoggleMultiplayer {
                 break;
             }
             if (allWords.containsKey(word.toUpperCase())) {
-                this.gameStats.addWord(word.toUpperCase(), BoggleStats.Player.Human);
+                if (Objects.equals(playerID, "Player1")) {
+                    this.gameStats.addWord(word.toUpperCase(), BoggleStats.Player.Player1);
+                } else {
+                    this.gameStats.addWord(word.toUpperCase(), BoggleStats.Player.Player2);
+                }
             }
         }
     }
 
-
     /*
-     * Gets words from the computer.  The computer should find words that are
-     * both valid and not in the player's word list.  For each word that the computer
-     * finds, update the computer's word list and increment the
-     * computer's score (stored in boggleStats).
      *
-     * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
+     *
      */
-    private void computerMove(Map<String,ArrayList<Position>> all_words){
+    private void wordsNotFound(Map<String,ArrayList<Position>> all_words) {
         Set<String> strList = all_words.keySet();
         Iterator<String> itr = strList.iterator();
         while (itr.hasNext()) {
             String wrd = itr.next();
-            if (!this.gameStats.getPlayerWords().contains(wrd)) {
-                this.gameStats.addWord(wrd, BoggleStats.Player.Computer);
+            if (!this.gameStats.getPlayer1Words().contains(wrd)) {
+                if (!this.gameStats.getPlayer2Words().contains(wrd)) {
+                    this.gameStats.addWord(wrd, BoggleStats.Player.Computer);
+                }
             }
         }
     }
+
 }
