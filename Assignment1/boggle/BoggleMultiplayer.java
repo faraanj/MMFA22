@@ -139,7 +139,7 @@ public class BoggleMultiplayer {
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        Dictionary boggleDict = new Dictionary("C:\\Users\\moeez\\MMFA22\\Assignment1\\wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        Dictionary boggleDict = new Dictionary("wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
         Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
         findAllWords(allWords, boggleDict, grid);

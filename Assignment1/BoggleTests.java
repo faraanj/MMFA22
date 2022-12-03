@@ -25,7 +25,7 @@ public class BoggleTests {
         Method method = game.getClass().getDeclaredMethod("findAllWords", Map.class, Dictionary.class, BoggleGrid.class);
         method.setAccessible(true);
 
-        Dictionary boggleDict = new Dictionary("C:\\Users\\moeez\\MMFA22\\Assignment1\\wordlist.txt");
+        Dictionary boggleDict = new Dictionary("wordlist.txt");
         Map<String, ArrayList<Position>> allWords = new HashMap<>();
         BoggleGrid grid = new BoggleGrid(4);
         grid.initalizeBoard("RHLDNHTGIPHSNMJO");
@@ -38,7 +38,7 @@ public class BoggleTests {
     //Dictionary Test
     @Test
     void containsWord() {
-        Dictionary dict = new Dictionary("C:\\Users\\moeez\\MMFA22\\Assignment1\\wordlist.txt");
+        Dictionary dict = new Dictionary("wordlist.txt");
         assertTrue(dict.containsWord("ENZYME"));
         assertTrue(dict.isPrefix("pench"));
     }
