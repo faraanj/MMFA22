@@ -139,7 +139,7 @@ public class BoggleMultiplayer {
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        Dictionary boggleDict = new Dictionary("wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        Dictionary boggleDict = new Dictionary("./Assignment1/wordlist.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
         Map<String, ArrayList<Position>> allWords = new HashMap<String, ArrayList<Position>>();
         findAllWords(allWords, boggleDict, grid);
@@ -305,8 +305,9 @@ public class BoggleMultiplayer {
     }
 
     /*
-     *
-     *
+     * Finds the words that both Player1 and Player2 have not been able to find
+     * in the round
+     * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
      */
     private void wordsNotFound(Map<String,ArrayList<Position>> all_words) {
         Set<String> strList = all_words.keySet();
@@ -319,6 +320,13 @@ public class BoggleMultiplayer {
                 }
             }
         }
+    }
+
+    /*
+     * @return BoggleStats the stats of this game are returned for testing purposes
+     */
+    public BoggleStats getGameStats() {
+        return this.gameStats;
     }
 
 }

@@ -1,5 +1,6 @@
 package boggle;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -30,6 +31,28 @@ public class BoggleStats {
      * player2's score for the current round
      */
     private int p2Score;
+    /**
+     * A list containing the winner of the round and the difference of points between the
+     * two players at the end of the round.
+     */
+    private ArrayList<String> rWinner = new ArrayList<>();
+    /**
+     * A list containing the winner of the game and the difference of points between the
+     * two players at the end of the game.
+     */
+    private ArrayList<String> gWinner = new ArrayList<>();
+    /**
+     * The number of rounds won by Player1
+     */
+    private int p1rounds = 0;
+    /**
+     * The number of rounds won by Player2
+     */
+    private int p2rounds = 0;
+    /**
+     * The number of rounds that ended in a draw
+     */
+    private int roundsDraw = 0;
     /**
      * player1's total score across every round
      */
@@ -210,6 +233,9 @@ public class BoggleStats {
             System.out.println("The words found by Player2 are: " + this.player2Words);
             System.out.println("The number of words found by Player2 are: " + this.player2Words.size());
             System.out.println("PLayer2's Score: " + this.p2Score);
+            this.rWinner = roundWinner();
+            System.out.println("The winner of this round is: " + this.rWinner.get(0));
+            System.out.println("The point difference between the two players is: " + this.rWinner.get(1));
             System.out.println("The words left in the matrix to find: " + this.computerWords);
         }
     }
@@ -233,6 +259,65 @@ public class BoggleStats {
             System.out.println("The total score for the Player2: " + this.p2ScoreTotal);
             System.out.println("The average number of words found by Player1 per round: " + this.p1AverageWords);
             System.out.println("The average number of words found by Player2 per round: " + this.p2AverageWords);
+            this.gWinner = gameWinner();
+            System.out.println("The number of rounds won by Player1 are: " + this.p1rounds);
+            System.out.println("The number of rounds won by Player2 are: " + this.p2rounds);
+            System.out.println("The number of rounds that ended in a draw are: " + this.roundsDraw);
+            System.out.println("The winner of the game is: " + this.gWinner.get(0));
+            System.out.println("The point difference between the two players is: " + this.gWinner.get(1));
+        }
+    }
+
+    /*
+     * @return ArrayList<String> A list of the winner of the round and the point difference between
+     * the two players at the end of the round.
+     */
+    private ArrayList<String> roundWinner() {
+        if (this.p1Score > this.p2Score) {
+            String difference = String.valueOf(this.p1Score - this.p2Score);
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("Player1");
+            winner.add(difference);
+            this.p1rounds += 1;
+            return winner;
+        } else if (this.p2Score > this.p1Score) {
+            String difference = String.valueOf(this.p2Score - this.p1Score);
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("Player2");
+            winner.add(difference);
+            this.p2rounds += 1;
+            return winner;
+        } else {
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("No One");
+            winner.add("0");
+            this.roundsDraw += 1;
+            return winner;
+        }
+    }
+
+    /*
+     * @return ArrayList<String> A list of the winner of the game and the point difference between
+     * the two players at the end of the game.
+     */
+    private ArrayList<String> gameWinner() {
+        if (this.p1ScoreTotal > this.p2ScoreTotal) {
+            String difference = String.valueOf(this.p1ScoreTotal - this.p2ScoreTotal);
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("Player1");
+            winner.add(difference);
+            return winner;
+        } else if (this.p2ScoreTotal > this.p1ScoreTotal) {
+            String difference = String.valueOf(this.p2ScoreTotal - this.p1ScoreTotal);
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("Player2");
+            winner.add(difference);
+            return winner;
+        } else {
+            ArrayList<String> winner = new ArrayList<>();
+            winner.add("No One");
+            winner.add("0");
+            return winner;
         }
     }
 
@@ -273,4 +358,10 @@ public class BoggleStats {
         return this.player2Words;
     }
 
+    /*
+     * @return Set<String> The computer's word list
+     */
+    public Set<String> getComputerWords() {
+        return this.computerWords;
+    }
 }
