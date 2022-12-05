@@ -35,8 +35,8 @@ public class BoggleModel implements Serializable{
      * Constructor for a boggle model
      */
     public BoggleModel(){
-        game = false;
         boggleGame = new BoggleGame();
+        boggleStats = new BoggleStats();
     }
 
     /**
@@ -46,19 +46,6 @@ public class BoggleModel implements Serializable{
         boggleGame.giveInstructions();
     }
 
-    /**
-     * Plays a round of the Game
-     */
-    public void playGame(){
-        boggleGame.playGame();
-    }
-
-    /**
-     * Start a new game
-     */
-    public void newGame() {
-        playGame();
-    }
 
     public int getWidth() {
         return this.WIDTH;
@@ -73,13 +60,42 @@ public class BoggleModel implements Serializable{
         setGame(boardSize, letters);
     }
 
-    private void setGame(int size, String letters){
+    public void setGame(int size, String letters){
         grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         Dictionary boggleDict = new Dictionary("wordlist.txt");
         allWords = new HashMap<String, ArrayList<Position>>();
         this.boggleGame.getAllWords(allWords, boggleDict, grid);
     }
+
+    public void checkWord(String word){
+        if (allWords.containsKey(word.toUpperCase())){
+            boggleStats.addWord(word, BoggleStats.Player.Human);
+        }
+    }
+
+    private void computerMove(Map<String,ArrayList<Position>> all_words){
+        Set<String> strList = all_words.keySet();
+        Iterator<String> itr = strList.iterator();
+        while (itr.hasNext()) {
+            String wrd = itr.next();
+            if (!this.boggleStats.getPlayerWords().contains(wrd)) {
+                this.boggleStats.addWord(wrd, BoggleStats.Player.Computer);
+            }
+        }
+    }
+
+    public void endRound(){
+        System.out.println(this.boggleStats.getRound());
+        computerMove(allWords);
+        this.boggleStats.summarizeRound();
+        this.boggleStats.endRound();
+    }
+    public void endGame(){
+        endRound();
+        this.boggleStats.summarizeGame();
+    }
+
 }
 
 

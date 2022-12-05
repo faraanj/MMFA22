@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.w3c.dom.Text;
+
 //new
 public class BoggleView{
     BoggleModel model; //reference to model
@@ -25,10 +27,12 @@ public class BoggleView{
 
     Scene boardChoice, lettersChoice, gameScene; //scenes to switch to
 
-    Button addWord, endRound, gridSmall, gridLarge, randomizeBoardLetters, InputBoardLetters; //buttons for functions
+    Button addWord, endGame, newRound, gridSmall, gridLarge, randomizeBoardLetters, InputBoardLetters; //buttons for functions
     Label scoreLabel = new Label("");
     Label boardChoiceLabel = new Label("");
     Label letterChoiceLabel = new Label("");
+
+    TextField letterInput, wordInput;
 
     BorderPane borderPane1, borderPane2, borderPane3;
     Canvas canvas;
@@ -108,14 +112,11 @@ public class BoggleView{
         InputBoardLetters.setFont(new Font(12));
         InputBoardLetters.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
 
-        //adding buttons for third screen
-        GridPane grid = new GridPane();
-        for (int r = 0; r < this.model.boardSize; r++) {
-            for (int c = 0; c < this.model.boardSize; c++) {
-                Button button = new Button(Character.toString(this.model.grid.getCharAt(r, c)));
-                grid.add(button, c, r);
-            }
-        }
+        //text field for second screen
+        letterInput = new TextField();
+        letterInput.setPromptText("Input your letter choice");
+        letterInput.setPrefColumnCount(this.model.boardSize*this.model.boardSize);
+
 
         //layout for scene 1 buttons
         HBox leftMenu1 = new HBox();
@@ -126,7 +127,7 @@ public class BoggleView{
 
         //layout for scene 2 buttons
         HBox leftMenu2 = new HBox();
-        leftMenu2.getChildren().addAll(randomizeBoardLetters, InputBoardLetters);
+        leftMenu2.getChildren().addAll(randomizeBoardLetters,  InputBoardLetters);
         leftMenu2.setPadding((new Insets(40, 20, 20, 20)));
         leftMenu2.setAlignment(Pos.CENTER);
         leftMenu2.setSpacing(150);
@@ -148,8 +149,8 @@ public class BoggleView{
         //setting up second scene
         borderPane2.setTop(topMenu2);
         borderPane2.setLeft(leftMenu2);
+        borderPane2.setBottom(letterInput);
         lettersChoice = new Scene(borderPane2, 400, 400);
-
 
         //actions for choosing grid size
         gridSmall.setOnAction(e -> {
@@ -166,7 +167,9 @@ public class BoggleView{
             gameUI();
         });
         InputBoardLetters.setOnAction(e -> {
-            stage.setScene(gameScene);
+            String letters = letterInput.getText();
+            this.model.setGame(this.model.boardSize, letters);
+            gameUI();
         });
 
         this.stage.setScene(boardChoice);
@@ -185,13 +188,75 @@ public class BoggleView{
         for (int r = 0; r < this.model.boardSize; r++) {
             for (int c = 0; c < this.model.boardSize; c++) {
                 Button button = new Button(Character.toString(this.model.grid.getCharAt(r, c)));
+                button.setPrefSize(40,40);
                 grid.add(button, c, r);
             }
         }
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(5);
+        grid.setHgap(5);
+        grid.setAlignment(Pos.CENTER);
+
+        addWord = new Button("Add Word");
+        addWord.setId("Add Word");
+        addWord.setPrefSize(100, 50);
+        addWord.setFont(new Font(12));
+        addWord.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
+
+        endGame = new Button("End Game");
+        endGame.setId("End Game");
+        endGame.setPrefSize(100, 50);
+        endGame.setFont(new Font(12));
+        endGame.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
+
+        newRound = new Button("New Round");
+        newRound.setId("new Round");
+        newRound.setPrefSize(100, 50);
+        newRound.setFont(new Font(12));
+        newRound.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
+
+        //text field for game screen
+        wordInput = new TextField();
+        wordInput.setPromptText("Enter a word");
+        wordInput.setPrefColumnCount(10);
+
+        //layout for game buttons
+        HBox leftMenu3 = new HBox();
+        leftMenu3.getChildren().addAll(addWord,  wordInput);
+        leftMenu3.setPadding((new Insets(40, 20, 20, 20)));
+        leftMenu3.setAlignment(Pos.CENTER);
+        leftMenu3.setSpacing(20);
+
+        HBox rightMenu = new HBox();
+        rightMenu.getChildren().addAll(endGame,  newRound);
+        rightMenu.setPadding((new Insets(40, 20, 20, 20)));
+        rightMenu.setAlignment(Pos.CENTER);
+        rightMenu.setSpacing(100);
+
         //setting up game scene
+        borderPane3.setTop(leftMenu3);
         borderPane3.setCenter(grid);
+        borderPane3.setBottom(rightMenu);
         gameScene = new Scene(borderPane3, 800, 800);
         stage.setScene(gameScene);
+
+        //actions for the buttons
+        addWord.setOnAction(e -> {
+            String word = wordInput.getText().toUpperCase();
+            this.model.checkWord(word);
+            wordInput.clear();
+            wordInput.setPromptText("Enter a word");
+        });
+        newRound.setOnAction(e -> {
+            this.stage.setScene(boardChoice);
+            this.model.endRound();
+            this.model.startGame();
+            initUI();
+        });
+        endGame.setOnAction(e -> {
+            this.model.endGame();
+            closeProgram();
+        });
 
     }
 
