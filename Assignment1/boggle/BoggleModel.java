@@ -15,11 +15,15 @@ public class BoggleModel implements Serializable{
 
     public static final int BUFFERZONE = 20; //space at the top
 
+    public int boardSize;
+
     protected BoggleGrid grid;
 
     protected BoggleStats boggleStats;
 
     protected Dictionary dictionary;
+
+    protected BoggleGame boggleGame;
 
     protected boolean game; //true when game is being played
 
@@ -28,15 +32,21 @@ public class BoggleModel implements Serializable{
      */
     public BoggleModel(){
         game = false;
+        boggleGame = new BoggleGame();
     }
 
     /**
      * Start new game
      */
     public void startGame() {
-        BoggleGame b = new BoggleGame();
-        b.giveInstructions();
-        b.playGame();
+        boggleGame.giveInstructions();
+    }
+
+    /**
+     * Plays a round of the Game
+     */
+    public void playGame(){
+        boggleGame.playGame();
     }
 
     /**
@@ -52,6 +62,10 @@ public class BoggleModel implements Serializable{
 
     public int getHeight() {
         return this.HEIGHT;
+    }
+
+    public void randomizeLetters() {
+        this.boggleGame.getRandomizeLetter(boardSize);
     }
 }
 
