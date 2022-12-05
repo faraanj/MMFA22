@@ -233,6 +233,10 @@ public class BoggleGame {
         }
     }
 
+    public void getAllWords(Map<String,ArrayList<Position>> allWords, Dictionary boggleDict, BoggleGrid boggleGrid){
+        findAllWords(allWords, boggleDict, boggleGrid);
+    }
+
     private Map<String,ArrayList<Position>> recurseWords(String word, ArrayList<Position> posList, Dictionary boggleDict, BoggleGrid boggleGrid) {
         Map<String,ArrayList<Position>> wordList = new HashMap<>();
         for (int i = -1; i < 2; i++) {

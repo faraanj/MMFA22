@@ -17,6 +17,10 @@ public class BoggleModel implements Serializable{
 
     public int boardSize;
 
+    public String letters;
+
+    private Map<String, ArrayList<Position>> allWords;
+
     protected BoggleGrid grid;
 
     protected BoggleStats boggleStats;
@@ -53,7 +57,7 @@ public class BoggleModel implements Serializable{
      * Start a new game
      */
     public void newGame() {
-        startGame();
+        playGame();
     }
 
     public int getWidth() {
@@ -65,7 +69,16 @@ public class BoggleModel implements Serializable{
     }
 
     public void randomizeLetters() {
-        this.boggleGame.getRandomizeLetter(boardSize);
+        letters = this.boggleGame.getRandomizeLetter(boardSize);
+        setGame(boardSize, letters);
+    }
+
+    private void setGame(int size, String letters){
+        grid = new BoggleGrid(size);
+        grid.initalizeBoard(letters);
+        Dictionary boggleDict = new Dictionary("wordlist.txt");
+        allWords = new HashMap<String, ArrayList<Position>>();
+        this.boggleGame.getAllWords(allWords, boggleDict, grid);
     }
 }
 

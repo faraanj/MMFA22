@@ -109,8 +109,13 @@ public class BoggleView{
         InputBoardLetters.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
 
         //adding buttons for third screen
-
-
+        GridPane grid = new GridPane();
+        for (int r = 0; r < this.model.boardSize; r++) {
+            for (int c = 0; c < this.model.boardSize; c++) {
+                Button button = new Button(Character.toString(this.model.grid.getCharAt(r, c)));
+                grid.add(button, c, r);
+            }
+        }
 
         //layout for scene 1 buttons
         HBox leftMenu1 = new HBox();
@@ -145,6 +150,7 @@ public class BoggleView{
         borderPane2.setLeft(leftMenu2);
         lettersChoice = new Scene(borderPane2, 400, 400);
 
+
         //actions for choosing grid size
         gridSmall.setOnAction(e -> {
             stage.setScene(lettersChoice);
@@ -156,8 +162,8 @@ public class BoggleView{
         });
         //actions for choosing letters
         randomizeBoardLetters.setOnAction(e -> {
-            stage.setScene(gameScene);
             this.model.randomizeLetters();
+            gameUI();
         });
         InputBoardLetters.setOnAction(e -> {
             stage.setScene(gameScene);
@@ -173,7 +179,24 @@ public class BoggleView{
 
     }
 
+    private void gameUI(){
+        //adding buttons for third screen
+        GridPane grid = new GridPane();
+        for (int r = 0; r < this.model.boardSize; r++) {
+            for (int c = 0; c < this.model.boardSize; c++) {
+                Button button = new Button(Character.toString(this.model.grid.getCharAt(r, c)));
+                grid.add(button, c, r);
+            }
+        }
+        //setting up game scene
+        borderPane3.setCenter(grid);
+        gameScene = new Scene(borderPane3, 800, 800);
+        stage.setScene(gameScene);
+
+    }
+
     private void closeProgram() {
         this.stage.close();
     }
+
 }
