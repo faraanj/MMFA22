@@ -271,7 +271,7 @@ public class BoggleMultiplayer {
     }
 
     /*
-     * Gets words from the user.  As words are input, check to see that they are valid.
+     * Gets words from the players.  As words are input, check to see that they are valid.
      * If yes, add the word to the player's word list (in boggleStats) and increment
      * the player's score (in boggleStats).
      * End the turn once the user hits return (with no word).
@@ -323,7 +323,7 @@ public class BoggleMultiplayer {
     }
 
     /*
-     * @return BoggleStats the stats of this game are returned for testing purposes
+     * @return BoggleStats The stats of this game are returned for testing purposes
      */
     public BoggleStats getGameStats() {
         return this.gameStats;

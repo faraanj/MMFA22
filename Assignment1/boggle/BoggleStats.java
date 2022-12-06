@@ -143,8 +143,8 @@ public class BoggleStats {
     }
 
     /* 
-     * Add a word to a given player's word list for the current round.
-     * You will also want to increment the player's score, as words are added.
+     * Adds a word to a given player's word list for the current round.
+     * Also increment the player's score, as words are added.
      *
      * @param word     The word to be added to the list
      * @param player  The player to whom the word was awarded
@@ -217,6 +217,9 @@ public class BoggleStats {
      * The words each player found this round.
      * Each number of words each player found this round.
      * Each player's score this round.
+     * The winner of the round if it is a multiplayer game.
+     * The score difference between the players if it is a multiplayer game.
+     * The words that both player weren't able to find, if it is a multiplayer game,
      */
     public void summarizeRound() {
         if (!gameMultiplayer) {
@@ -245,6 +248,9 @@ public class BoggleStats {
      * The total number of rounds played.
      * The total score for either player.
      * The average number of words found by each player per round.
+     * The number of rounds won by each player if it is a multiplayer game.
+     * The number of rounds drawn if it is a multiplayer game.
+     * The winner of the game if it is multiplayer.
      */
     public void summarizeGame() {
         if (!gameMultiplayer) {
