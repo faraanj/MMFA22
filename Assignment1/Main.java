@@ -1,15 +1,18 @@
+import boggle.BoggleController;
 import boggle.BoggleGame;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import boggle.BoggleMultiplayer;
-
 import java.util.Objects;
 import java.util.Scanner;
 
 /**
  * The Main class for the first the game boggle for the CSC207, Fall 2022 group project.
  */
-public class Main {
+public class Main extends Application {
     /**
      * Main method.
+     *
      * @param args command line arguments.
      **/
     public static void main(String[] args) {
@@ -21,9 +24,7 @@ public class Main {
             letterCheck = check.nextLine();
         }
         if (letterCheck.equalsIgnoreCase("c")) {
-            BoggleGame b = new BoggleGame();
-            b.giveInstructions();
-            b.playGame();
+            launch(args);
         } else {
             BoggleMultiplayer b = new BoggleMultiplayer();
             b.giveInstructions();
@@ -31,4 +32,11 @@ public class Main {
         }
     }
 
+    /**
+     * Start the visualization
+     */
+    public void start(Stage primaryStage) throws Exception {
+        BoggleController b = new BoggleController();
+        b.start(primaryStage);
+    }
 }
