@@ -2,38 +2,41 @@ import boggle.BoggleController;
 import boggle.BoggleGame;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import boggle.BoggleMultiplayer;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
- * The Main class for the first Assignment in CSC207, Fall 2022
+ * The Main class for the first the game boggle for the CSC207, Fall 2022 group project.
  */
 public class Main extends Application {
     /**
      * Main method.
+     *
      * @param args command line arguments.
-
-    public static void main(String[] args)  {
-    BoggleController b = new BoggleController();
-
-    //BoggleGame b = new BoggleGame();
-    //b.giveInstructions();
-    //b.playGame();
-    }
      **/
-    /** Main method
-     */
     public static void main(String[] args) {
-        launch(args);
+        Scanner check = new Scanner(System.in);
+        System.out.println("Press 'M' for a multiplayer game or 'C' for a game against the computer.");
+        String letterCheck = check.nextLine();
+        while (!(Objects.equals(letterCheck.toLowerCase(), "m")) && !(Objects.equals(letterCheck.toLowerCase(), "c"))) {
+            System.out.println("Press 'M' for a multiplayer game or 'C' for a game against the computer.");
+            letterCheck = check.nextLine();
+        }
+        if (letterCheck.equalsIgnoreCase("c")) {
+            launch(args);
+        } else {
+            BoggleMultiplayer b = new BoggleMultiplayer();
+            b.giveInstructions();
+            b.playGame();
+        }
     }
 
-    /** Start the visualization
+    /**
+     * Start the visualization
      */
     public void start(Stage primaryStage) throws Exception {
         BoggleController b = new BoggleController();
         b.start(primaryStage);
-
-        //BoggleGame b = new BoggleGame();
-        //b.giveInstructions();
-        //b.playGame();
     }
-
 }
