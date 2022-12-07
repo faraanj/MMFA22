@@ -1,5 +1,7 @@
-package boggle.decorator;
+package boggle;
+
+import java.util.ArrayList;
 
 public interface Achievements {
-    String getDescription();
+    String getDescription(ArrayList<String> value);
 }

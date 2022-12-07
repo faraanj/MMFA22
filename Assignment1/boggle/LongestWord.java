@@ -1,9 +1,9 @@
-package boggle.achievements;
+package boggle;
 
 
 import java.util.ArrayList;
 
-public class LongestWord implements Achievements{
+public class LongestWord implements Achievements {
 
     @Override
     public String getDescription(ArrayList<String> value) {

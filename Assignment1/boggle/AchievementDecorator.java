@@ -1,6 +1,5 @@
-package boggle.decorator;
+package boggle;
 
-import boggle.achievements.Achievements;
 
 import java.util.ArrayList;
 

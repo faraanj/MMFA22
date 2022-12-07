@@ -1,3 +1,5 @@
+package boggle;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,10 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import boggle.decorator.AchievementDecorator;
-import boggle.achievements.Achievements;
-import boggle.achievements.HighestScore;
-import boggle.achievements.LongestWord;
 
 public class BoggleTests {
 
@@ -331,32 +329,6 @@ public class BoggleTests {
         newArray.add("2");
 
         assertEquals(newArray, s);
-    }
-
-    // AchievementsTest1 checks if the LongestWord achievement works
-    @Test
-    void AchievementsTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        LongestWord word = new LongestWord();
-        AchievementDecorator d = new AchievementDecorator(word);
-        ArrayList<String> test_list = new ArrayList<>();
-        test_list.add("Shiver");
-        test_list.add("Ghost");
-        test_list.add("Coincide");
-        test_list.add("Photography");
-        assertTrue(d.getDescription(test_list).toLowerCase().contains("photography"));
-    }
-
-    // AchievementsTest2 checks if the HighestScore achievement works
-    @Test
-    void AchievementsTest2() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        HighestScore score = new HighestScore();
-        AchievementDecorator d = new AchievementDecorator(score);
-        ArrayList<String> test_list = new ArrayList<>();
-        test_list.add("10");
-        test_list.add("100");
-        test_list.add("1000");
-        test_list.add("5000");
-        assertTrue(d.getDescription(test_list).contains("5000"));
     }
 
 }

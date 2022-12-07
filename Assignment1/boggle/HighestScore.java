@@ -1,4 +1,4 @@
-package boggle.achievements;
+package boggle;
 
 
 import java.util.ArrayList;
