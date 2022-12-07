@@ -33,8 +33,9 @@ public class BoggleController extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.model = new BoggleModel();
-        this.view = new BoggleView(model, primaryStage);
         this.model.startGame();
+        this.view = new BoggleView(model, primaryStage);
+        //this.model.playGame();
     }
 
 }

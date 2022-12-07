@@ -182,6 +182,12 @@ public class BoggleGame {
         return letterString.toString();
     }
 
+    /*
+     * Returns randomized string of letters
+     */
+    public String getRandomizeLetter(int size){
+        return randomizeLetters(size);
+    }
 
     /* 
      * This should be a recursive function that finds all valid words on the boggle board.
@@ -225,6 +231,10 @@ public class BoggleGame {
             }
             allWords.putAll(wordList);
         }
+    }
+
+    public void getAllWords(Map<String,ArrayList<Position>> allWords, Dictionary boggleDict, BoggleGrid boggleGrid){
+        findAllWords(allWords, boggleDict, boggleGrid);
     }
 
     private Map<String,ArrayList<Position>> recurseWords(String word, ArrayList<Position> posList, Dictionary boggleDict, BoggleGrid boggleGrid) {
