@@ -7,12 +7,18 @@ import javafx.scene.text.Font;
  *
  */
 public class BoggleResizer {
-    int numResized;
 
+    /**
+     * BoggleResizer constructor
+     */
     public BoggleResizer(){
-        int numResized = 0;
     }
 
+    /**
+     * @param button
+     * Increases the size of the button as well as the size of the font within
+     * if the size of the button is within the bounds
+     */
     public void reSizeUp(Button button){
         if(button.getPrefHeight() < 76){
             double inch = button.getFont().getSize() + 1;
@@ -23,6 +29,11 @@ public class BoggleResizer {
         }
     }
 
+    /**
+     * @param button
+     * Decreases the size of the button as well as the size of the font within
+     * if the size of the button is within the bounds
+     */
     public void reSizeDown(Button button){
         if(button.getPrefHeight() > 40){
             double inch = button.getFont().getSize() - 1;
