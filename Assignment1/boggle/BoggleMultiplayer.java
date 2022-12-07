@@ -278,6 +278,7 @@ public class BoggleMultiplayer {
      *
      * @param board The boggle board
      * @param allWords A mutable list of all legal words that can be found, given the boggleGrid grid letters
+     * @param playerID The ID of the player whose turn it is, i.e. "Player1" or "Player2"
      */
     private void humanMove(BoggleGrid board, Map<String,ArrayList<Position>> allWords, String playerID){
         System.out.println("It's " + playerID + "'s turn to find some words!");
