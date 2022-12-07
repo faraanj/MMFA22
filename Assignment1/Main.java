@@ -1,5 +1,4 @@
 import boggle.BoggleController;
-import boggle.BoggleGame;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import boggle.BoggleMultiplayer;
@@ -34,6 +33,9 @@ public class Main extends Application {
 
     /**
      * Start the visualization
+     *
+     * @param primaryStage stage upon which to load the GUI elements
+     *
      */
     public void start(Stage primaryStage) throws Exception {
         BoggleController b = new BoggleController();

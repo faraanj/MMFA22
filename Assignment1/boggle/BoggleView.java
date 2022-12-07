@@ -9,6 +9,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
+/**
+ * Represents a Boggle View for boggle
+ */
 public class BoggleView{
 
     protected BoggleResizer boggleResizer; //Boggle Resizer for Accessibility feature
@@ -28,7 +31,7 @@ public class BoggleView{
     /**
      * Constructor
      *
-     * @param model reference to tetris model
+     * @param model reference to boggle model
      * @param stage application stage
      */
 
@@ -38,6 +41,10 @@ public class BoggleView{
         initUI();
         this.boggleResizer = new BoggleResizer();
     }
+
+    /**
+     * Initialize interface
+     */
 
     private void initUI() {
 
@@ -216,6 +223,9 @@ public class BoggleView{
 
     }
 
+    /**
+     * Run the game interface
+     */
     private void gameUI(){
         //adding buttons for third screen
         ArrayList<Button> buttonArrayList = new ArrayList<>();
@@ -330,6 +340,9 @@ public class BoggleView{
 
     }
 
+    /**
+     * End the program
+     */
     private void closeProgram() {
         this.stage.close();
     }
