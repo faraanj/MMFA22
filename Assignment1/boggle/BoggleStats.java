@@ -271,6 +271,7 @@ public class BoggleStats {
             System.out.println("The number of rounds that ended in a draw are: " + this.roundsDraw);
             System.out.println("The winner of the game is: " + this.gWinner.get(0));
             System.out.println("The point difference between the two players is: " + this.gWinner.get(1));
+            System.exit(0);
         }
     }
 
