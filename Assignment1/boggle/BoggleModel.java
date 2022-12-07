@@ -63,7 +63,7 @@ public class BoggleModel implements Serializable{
     public void setGame(int size, String letters){
         grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
-        Dictionary boggleDict = new Dictionary("./Assignment1/wordlist.txt");
+        Dictionary boggleDict = new Dictionary("wordlist.txt");
         allWords = new HashMap<String, ArrayList<Position>>();
         this.boggleGame.getAllWords(allWords, boggleDict, grid);
     }
