@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 
 import boggle.*;
 import boggle.Dictionary;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -326,5 +327,18 @@ public class BoggleTests {
 
         assertEquals(newArray, s);
     }
+
+    @Test
+    void boggleModelSetGameSanityTest(){
+        BoggleModel model = new BoggleModel();
+        int size = 4;
+        model.boardSize = size;
+        String letters = "RHLDNHTGIPHSNMJO";
+        model.setGame(size, letters);
+
+        assertTrue(size == model.boardSize);
+    }
+
+
 
 }

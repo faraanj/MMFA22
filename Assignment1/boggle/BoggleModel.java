@@ -25,7 +25,7 @@ public class BoggleModel implements Serializable{
 
     protected LongestWord longestWord;
 
-    private String fact;
+    private String fact = "";
 
     /**
      * Constructor for a boggle model

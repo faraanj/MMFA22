@@ -195,8 +195,10 @@ public class BoggleView{
         });
         InputBoardLetters.setOnAction(e -> {
             String letters = letterInput.getText();
-            this.model.setGame(this.model.boardSize, letters);
-            gameUI();
+            if (letters.length() == this.model.boardSize*this.model.boardSize){
+                this.model.setGame(this.model.boardSize, letters);
+                gameUI();
+            }
         });
 
         Big3.setOnAction(e -> {
