@@ -3,8 +3,14 @@ package boggle;
 
 import java.util.ArrayList;
 
+/**
+ * Highest Score Achievement
+ */
 public class HighestScore implements Achievements{
-
+    /**
+     * @param value - An arrayList containing all the user's scores
+     * @return The heighest score from <value>
+     */
     @Override
     public String getDescription(ArrayList<String> value) {
         String highestScore = "0";

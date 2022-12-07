@@ -1,10 +1,17 @@
 package boggle;
 
-
 import java.util.ArrayList;
 
-public class LongestWord implements Achievements {
+/**
+ * Longest Word Achievement
+ */
+public class LongestWord implements Achievements{
 
+    /**
+     *
+     * @param value - An arrayList containing all the user's found words
+     * @return The longest found word
+     */
     @Override
     public String getDescription(ArrayList<String> value) {
         String longestWord = "";

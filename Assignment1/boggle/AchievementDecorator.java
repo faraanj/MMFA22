@@ -1,6 +1,5 @@
 package boggle;
 
-
 import java.util.ArrayList;
 
 /**
@@ -16,6 +15,10 @@ public class AchievementDecorator implements Achievements{
         this.achievement = achievement;
     }
 
+    /**
+     * @param value - The value of the achievement
+     * @return A string that contains the achievement description and value
+     */
     @Override
     public String getDescription(ArrayList<String> value){
         String curr_description = this.achievement.getDescription(value);
