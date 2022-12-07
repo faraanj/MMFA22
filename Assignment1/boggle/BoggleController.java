@@ -1,19 +1,15 @@
 package boggle;
 
-
-import boggle.BoggleModel;
-import boggle.BoggleView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
  * A Boggle Application, in JavaFX
  */
-// new
 
 public class BoggleController extends Application{
-    BoggleModel model;
-    BoggleView view;
+    private BoggleModel model;
+    private BoggleView view;
 
 
     /**
@@ -36,7 +32,6 @@ public class BoggleController extends Application{
         this.model = new BoggleModel();
         this.model.startGame();
         this.view = new BoggleView(model, primaryStage);
-        //this.model.playGame();
     }
 
 }

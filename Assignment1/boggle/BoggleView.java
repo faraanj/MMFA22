@@ -1,52 +1,29 @@
 package boggle;
-import boggle.BoggleModel;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-//new
 public class BoggleView{
 
-    BoggleResizer boggleResizer; //Boggle Resizer for Accessibility feature
-    BoggleModel model; //reference to model
-    Stage stage;
+    protected BoggleResizer boggleResizer; //Boggle Resizer for Accessibility feature
+    protected BoggleModel model; //reference to model
+    private Stage stage;
 
-    Scene boardChoice, lettersChoice, gameScene; //scenes to switch to
+    private Scene boardChoice, lettersChoice, gameScene; //scenes to switch to
 
-    Button addWord, endGame, newRound, gridSmall, gridLarge, randomizeBoardLetters, InputBoardLetters, Big1, Big2, Big3, Small1, Small2, Small3; //buttons for functions
-    Label scoreLabel = new Label("");
-    Label boardChoiceLabel = new Label("");
-    Label letterChoiceLabel = new Label("");
+    private Button addWord, endGame, newRound, gridSmall, gridLarge, randomizeBoardLetters, InputBoardLetters, Big1, Big2, Big3, Small1, Small2, Small3; //buttons for functions
+    private Label boardChoiceLabel = new Label("");
+    private Label letterChoiceLabel = new Label("");
 
-    TextField letterInput, wordInput;
+    private TextField letterInput, wordInput;
 
-    BorderPane borderPane1, borderPane2, borderPane3;
-    Canvas canvas;
-    GraphicsContext gc; //the graphics context will be linked to the canvas
-
-    Boolean paused;
-    Timeline timeline;
-
-    private double width; //height and width of canvas
-    private double height;
+    private BorderPane borderPane1, borderPane2, borderPane3;
 
     /**
      * Constructor
@@ -63,10 +40,6 @@ public class BoggleView{
     }
 
     private void initUI() {
-        this.paused = false;
-
-        this.width = this.model.getWidth() + 10;
-        this.height = this.model.getHeight() + 10;
 
         //setting up all the border panes
         borderPane1 = new BorderPane();
@@ -77,7 +50,6 @@ public class BoggleView{
         borderPane3.setStyle("-fx-background-color: #4BEDE5;");
 
         //labels
-        scoreLabel.setId("ScoreLabel");
         boardChoiceLabel.setId("GridSizeLabel");
         letterChoiceLabel.setId("LettersChoiceLabel");
 
