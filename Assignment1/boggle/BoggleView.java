@@ -26,12 +26,15 @@ import java.util.ArrayList;
 public class BoggleView{
 
     BoggleResizer boggleResizer; //Boggle Resizer for Accessibility feature
+
     BoggleModel model; //reference to model
     Stage stage;
 
     Scene boardChoice, lettersChoice, gameScene; //scenes to switch to
 
+
     Button addWord, endGame, newRound, gridSmall, gridLarge, randomizeBoardLetters, InputBoardLetters, Big1, Big2, Big3, Small1, Small2, Small3; //buttons for functions
+
     Label scoreLabel = new Label("");
     Label boardChoiceLabel = new Label("");
     Label letterChoiceLabel = new Label("");
@@ -81,12 +84,15 @@ public class BoggleView{
         boardChoiceLabel.setId("GridSizeLabel");
         letterChoiceLabel.setId("LettersChoiceLabel");
 
+
         boardChoiceLabel.setText("Click 5*5 to play on a big (5x5) grid; \n 4*4 to play on a small (4x4) one:\n Click +/- to adjust button size");
+
         boardChoiceLabel.setFont(new Font(14));
         boardChoiceLabel.setStyle("-fx-text-fill: #232E94");
         boardChoiceLabel.setAlignment(Pos.CENTER);
         letterChoiceLabel.setText("Click \"randomize letters\" to randomize letters in the grid;\n " +
                 "\"Input Letters\" to choose the letters yourself\n Click +/- to adjust button size");
+
         letterChoiceLabel.setFont(new Font(14));
         letterChoiceLabel.setStyle("-fx-text-fill: #232E94");
         letterChoiceLabel.setAlignment(Pos.CENTER);
@@ -94,6 +100,7 @@ public class BoggleView{
         //adding buttons for first screen
         gridSmall = new Button("4*4");
         gridSmall.setId("Grid Size 4*4");
+
         gridSmall.setPrefSize(100, 40);
         gridSmall.setFont(new Font(12));
         gridSmall.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
@@ -115,18 +122,21 @@ public class BoggleView{
         gridLarge = new Button("5*5");
         gridLarge.setId("Grid Size 5*5");
         gridLarge.setPrefSize(100, 40);
+
         gridLarge.setFont(new Font(12));
         gridLarge.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
 
         //adding buttons for second screen
         randomizeBoardLetters = new Button("Randomize \n    Letters");
         randomizeBoardLetters.setId("Randomize Letters");
+
         randomizeBoardLetters.setPrefSize(100, 40 );
         randomizeBoardLetters.setFont(new Font(12));
         randomizeBoardLetters.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
 
         InputBoardLetters = new Button(" Input \nLetters");
         InputBoardLetters.setId("Input Letters");
+
         InputBoardLetters.setPrefSize(100, 40);
         InputBoardLetters.setFont(new Font(12));
         InputBoardLetters.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
@@ -153,6 +163,7 @@ public class BoggleView{
 
         //layout for scene 1 buttons
         HBox leftMenu1 = new HBox();
+
         leftMenu1.getChildren().addAll(gridSmall, gridLarge, Big2, Small2);
         leftMenu1.setPadding((new Insets(40, 20, 20, 20)));
         leftMenu1.setAlignment(Pos.CENTER);
@@ -209,17 +220,6 @@ public class BoggleView{
             boggleResizer.reSizeDown(gridSmall);
         });
 
-        //actions for choosing letters
-        randomizeBoardLetters.setOnAction(e -> {
-            this.model.randomizeLetters();
-            gameUI();
-        });
-        InputBoardLetters.setOnAction(e -> {
-            String letters = letterInput.getText();
-            this.model.setGame(this.model.boardSize, letters);
-            gameUI();
-        });
-
         Big3.setOnAction(e -> {
             boggleResizer.reSizeUp(Big3);
             boggleResizer.reSizeUp(Small3);
@@ -234,24 +234,10 @@ public class BoggleView{
             boggleResizer.reSizeDown(InputBoardLetters);
         });
 
-        this.stage.setScene(boardChoice);
-        this.stage.setTitle("CSC207 Boggle");
-        this.stage.setOnCloseRequest(e -> {
-            e.consume();
-            closeProgram();
-        });
-        this.stage.show();
-
-    }
 
     private void gameUI(){
         //adding buttons for third screen
         ArrayList<Button> buttonArrayList = new ArrayList<>();
-        GridPane grid = new GridPane();
-        for (int r = 0; r < this.model.boardSize; r++) {
-            for (int c = 0; c < this.model.boardSize; c++) {
-                Button button = new Button(Character.toString(this.model.grid.getCharAt(r, c)));
-                button.setPrefSize(40,40);
                 buttonArrayList.add(button);
                 grid.add(button, c, r);
                 // Allows the buttons to be clicked, adds the clicked character to the textField
@@ -333,6 +319,7 @@ public class BoggleView{
             wordInput.clear();
             wordInput.setPromptText("Enter a word");
         });
+
         Big1.setOnAction(e -> {
             for (Button butt : buttonArrayList) {
                 boggleResizer.reSizeUp(butt);
@@ -344,6 +331,7 @@ public class BoggleView{
                 boggleResizer.reSizeDown(butt);
             }
         });
+
         newRound.setOnAction(e -> {
             this.stage.setScene(boardChoice);
             this.model.endRound();
