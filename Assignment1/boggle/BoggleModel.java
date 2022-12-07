@@ -29,6 +29,10 @@ public class BoggleModel implements Serializable{
 
     protected BoggleGame boggleGame;
 
+    protected LongestWord longestWord;
+
+    private String fact;
+
     protected boolean game; //true when game is being played
 
     /**
@@ -65,12 +69,19 @@ public class BoggleModel implements Serializable{
         grid.initalizeBoard(letters);
         Dictionary boggleDict = new Dictionary("./Assignment1/wordlist.txt");
         allWords = new HashMap<String, ArrayList<Position>>();
+        longestWord = new LongestWord();
         this.boggleGame.getAllWords(allWords, boggleDict, grid);
     }
 
     public void checkWord(String word){
         if (allWords.containsKey(word.toUpperCase())){
             boggleStats.addWord(word, BoggleStats.Player.Human);
+            Set<String> playerList = boggleStats.getPlayerWords();
+            ArrayList<String> playerWord = new ArrayList<String>();
+            for (String i : playerList)
+                playerWord.add(i);
+            fact = longestWord.getDescription(playerWord);
+            System.out.println(fact);
         }
     }
 
@@ -94,6 +105,7 @@ public class BoggleModel implements Serializable{
     public void endGame(){
         endRound();
         this.boggleStats.summarizeGame();
+        System.out.println(fact);
     }
 
 }
